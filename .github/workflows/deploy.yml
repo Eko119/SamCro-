@@ -49,6 +49,9 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # Pin to the version the flags above were verified against; the
+          # action otherwise installs whatever it defaults to (3.90.0 today).
+          wranglerVersion: "4.120.0"
           command: >-
             pages deploy dist
             --project-name=${{ env.PROJECT_NAME }}
