@@ -11,12 +11,16 @@ concurrency:
   group: pages-deploy-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  PROJECT_NAME: samanthas-crochet-boutique
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       deployments: write
+
     steps:
       - uses: actions/checkout@v4
 
@@ -27,13 +31,34 @@ jobs:
       - name: Build dist/
         run: node build.mjs
 
+      # `pages deploy` will not create a missing project when it cannot prompt,
+      # so make the project first. Every run after the first is a no-op — the
+      # deploy step below is what gates on the credentials being valid.
+      - name: Ensure the Pages project exists
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx --yes wrangler@4 pages project create "$PROJECT_NAME" \
+            --production-branch="${{ github.event.repository.default_branch }}"
+
       - name: Publish to Cloudflare Pages
+        id: publish
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # Creates the Pages project on the first run if it does not exist.
           command: >-
             pages deploy dist
-            --project-name=samanthas-crochet-boutique
+            --project-name=${{ env.PROJECT_NAME }}
             --branch=${{ github.ref_name }}
+
+      - name: Report the URL
+        run: |
+          {
+            echo "### Samantha's Crochet Boutique is live"
+            echo
+            echo "- Deployment: ${{ steps.publish.outputs.deployment-url }}"
+            echo "- Production: https://${PROJECT_NAME}.pages.dev"
+          } >> "$GITHUB_STEP_SUMMARY"
