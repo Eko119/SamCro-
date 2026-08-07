@@ -1,0 +1,12 @@
+{
+  "name": "samanthas-crochet-boutique",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Storefront for Samantha's Crochet Boutique, built on the Modernist design system.",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "npx --yes serve .",
+    "preview": "npm run build && npx --yes serve dist",
+    "deploy": "npm run build && wrangler pages deploy dist --project-name=samanthas-crochet-boutique"
+  }
+}

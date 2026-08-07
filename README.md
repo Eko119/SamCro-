@@ -21,8 +21,45 @@ No build step, no dependencies. Open the HTML file directly, or serve the
 directory:
 
 ```sh
-npx serve .
+npm run dev
 ```
+
+## Deploying to Cloudflare Pages
+
+`build.mjs` assembles `dist/` — it copies the page to `index.html` (the design
+canvas filename is not a URL anyone should type) and places the assets beside it
+so every relative path in the page keeps working.
+
+```sh
+npm run build     # -> dist/
+npm run preview   # build, then serve dist/ locally
+```
+
+Deploying needs a Cloudflare account. Pick either route.
+
+**Route A — from a machine with wrangler**
+
+```sh
+export CLOUDFLARE_API_TOKEN=…      # scope: Account → Cloudflare Pages → Edit
+export CLOUDFLARE_ACCOUNT_ID=…     # dash.cloudflare.com → right sidebar
+npm run deploy
+```
+
+The first run creates the `samanthas-crochet-boutique` Pages project and prints
+the live `*.pages.dev` URL.
+
+**Route B — from CI, no token on your machine**
+
+`.github/workflows/deploy.yml` deploys on every push to the default branch. Add
+two repository secrets under **Settings → Secrets and variables → Actions**:
+
+| Secret | Where to get it |
+| --- | --- |
+| `CLOUDFLARE_API_TOKEN` | My Profile → API Tokens → Create Token → *Edit Cloudflare Workers* template, or a custom token with **Account → Cloudflare Pages → Edit** |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare dashboard, right-hand sidebar |
+
+Then re-run the workflow from the Actions tab. The deployment URL appears in the
+job summary.
 
 ## How it's put together
 
