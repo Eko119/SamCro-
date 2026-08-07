@@ -1,5 +1,7 @@
 # Samantha's Crochet Boutique
 
+**Live: https://samanthas-crochet-boutique.pages.dev**
+
 A single-page storefront for a handmade crochet studio, built on the
 **Modernist** design system: Swiss-modernist structure — strict grid, hairline
 rules, tight display tracking, one accent used sparingly — warmed for a
