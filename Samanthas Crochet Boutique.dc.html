@@ -1,0 +1,825 @@
+<!doctype html>
+<!--
+  Samantha's Crochet Boutique
+  design system: modernist-d258255b-cd92-4baf-aa18-0c668ae74ef5
+
+  Swiss-modernist structure — strict grid, hairline rules, one accent — warmed
+  for a handmade-goods shop. Works with JavaScript off; support.js layers on
+  filtering, the basket count, the drawer and entrance motion.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Samantha's Crochet Boutique — handmade blankets, wearables &amp; homeware</title>
+    <meta
+      name="description"
+      content="Hand-crocheted blankets, wearables, bags and homeware made to order in small batches from British wool, alpaca and organic cotton."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#faf5ed" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#14120f" media="(prefers-color-scheme: dark)" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%23c4562f'/%3E%3Cg stroke='%23faf5ed' stroke-width='1.6' fill='none' stroke-linecap='round'%3E%3Cpath d='M7 9c5 2 10 6.4 12.6 13'/%3E%3Cpath d='M4.6 18c4.8-1 9.8.8 13.1 4.8'/%3E%3Cpath d='M13 4.6c2 4.3 6.9 7.7 13 8.9'/%3E%3C/g%3E%3C/svg%3E"
+    />
+
+    <link rel="stylesheet" href="_ds/modernist-d258255b-cd92-4baf-aa18-0c668ae74ef5/styles.css" />
+    <script src="_ds/modernist-d258255b-cd92-4baf-aa18-0c668ae74ef5/_ds_bundle.js" defer></script>
+    <script src="image-slot.js" defer></script>
+    <script src="support.js" defer></script>
+
+    <noscript>
+      <style>
+        [data-reveal] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- ===================================================== announce bar -->
+    <div class="announce" id="top" data-page-region>
+      <p class="sr-only">
+        Free shipping over $120. Every piece is made to order. Small-batch hand-dyed yarn.
+      </p>
+      <ds-marquee speed="52" aria-hidden="true">
+        <span class="marquee__item">
+          Free shipping over $120
+          <span class="marquee__dot"></span>
+          Every piece made to order
+          <span class="marquee__dot"></span>
+          Small-batch hand-dyed yarn
+          <span class="marquee__dot"></span>
+          Plastic-free packaging
+          <span class="marquee__dot"></span>
+        </span>
+      </ds-marquee>
+    </div>
+
+    <!-- ========================================================== header -->
+    <header class="site-header" data-page-region>
+      <div class="shell site-header__bar">
+        <a class="brand" href="#top">
+          <svg
+            class="brand__mark"
+            viewBox="0 0 32 32"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="14.5" cy="15.5" r="10.5" />
+            <path d="M6.5 8.8c4.6 1.9 9.4 5.9 11.8 12.1" />
+            <path d="M4.6 17c4.4-.9 9 .7 12.1 4.4" />
+            <path d="M11.6 5.4c1.9 4 6.4 7.1 12 8.2" />
+            <path d="M25 18.5c1 2 2.3 3.2 3.8 3.7-1.8.7-3 2-3.5 4" />
+          </svg>
+          <span class="brand__name">
+            <b>Samantha's</b>
+            <span>Crochet Boutique</span>
+          </span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <a class="nav__link" href="#shop">Shop</a>
+          <a class="nav__link" href="#craft">Craft</a>
+          <a class="nav__link" href="#lookbook">Lookbook</a>
+          <a class="nav__link" href="#reviews">Reviews</a>
+          <a class="nav__link" href="#faq">FAQ</a>
+        </nav>
+
+        <div class="header__actions">
+          <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch theme">
+            <ds-icon name="moon"></ds-icon>
+          </button>
+
+          <button
+            class="icon-btn cart-btn"
+            type="button"
+            data-stub="Checkout isn't wired up in this preview"
+          >
+            <ds-icon name="cart"></ds-icon>
+            <span class="cart-count" data-basket-count aria-hidden="true">0</span>
+            <span class="sr-only">Basket</span>
+          </button>
+
+          <button
+            class="icon-btn nav-toggle"
+            type="button"
+            data-nav-open
+            aria-expanded="false"
+            aria-controls="nav-drawer"
+          >
+            <ds-icon name="menu"></ds-icon>
+            <span class="sr-only">Menu</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" data-page-region>
+      <!-- ========================================================== hero -->
+      <section class="hero">
+        <div class="shell hero__grid">
+          <div>
+            <p class="eyebrow" data-reveal>Small batch &middot; Made to order</p>
+
+            <h1 class="display hero__title" data-reveal>
+              Every piece, <em>one stitch</em> at a time.
+            </h1>
+
+            <p class="lede" data-reveal>
+              Blankets, wearables and homeware crocheted by hand in Somerset — British
+              wool, alpaca and organic cotton, dyed in six-skein lots, blocked and
+              finished before they're boxed.
+            </p>
+
+            <div class="cluster hero__actions" data-reveal>
+              <a class="btn btn--primary" href="#shop">
+                Shop the collection
+                <ds-icon name="arrow"></ds-icon>
+              </a>
+              <a class="btn btn--ghost" href="#craft">How it's made</a>
+            </div>
+
+            <div class="hero__facts" data-reveal>
+              <div class="hero__fact">
+                <b class="num"><ds-counter value="12"></ds-counter></b>
+                <span>Years at the hook</span>
+              </div>
+              <div class="hero__fact">
+                <b class="num">1&nbsp;of&nbsp;1</b>
+                <span>No two alike</span>
+              </div>
+              <div class="hero__fact">
+                <b class="num"><ds-counter value="100"></ds-counter>%</b>
+                <span>Natural fibre</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero__media" data-reveal>
+            <image-slot
+              ratio="4/5"
+              tone="clay"
+              label="Meadow throw — merino &amp; alpaca, hand-dyed"
+            ></image-slot>
+
+            <div class="hero__badge">
+              <span class="tag tag--support">Made to order</span>
+              <b>2–3 weeks</b>
+              <span class="field__label">Studio turnaround</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================== ticker -->
+      <div class="ticker">
+        <ds-marquee speed="72" aria-hidden="true">
+          <span class="marquee__item">
+            Hand-dyed yarn
+            <span class="marquee__dot"></span>
+            Blocked by hand
+            <span class="marquee__dot"></span>
+            Natural fibres only
+            <span class="marquee__dot"></span>
+            Made to order
+            <span class="marquee__dot"></span>
+            Ships worldwide
+            <span class="marquee__dot"></span>
+          </span>
+        </ds-marquee>
+      </div>
+
+      <!-- ========================================================== shop -->
+      <section class="section" id="shop">
+        <div class="shell">
+          <div class="section__head section__head--split">
+            <div data-reveal>
+              <p class="eyebrow">The collection</p>
+              <h2 class="h1">Pieces made to be used.</h2>
+            </div>
+            <p class="prose" data-reveal>
+              Eight pieces in the current run. When a colourway sells out it's gone until
+              the next dye day — nothing is reprinted to order.
+            </p>
+          </div>
+
+          <div class="cluster mb-6">
+            <div class="filters" role="group" aria-label="Filter by category">
+              <button class="chip" type="button" data-filter="all" aria-pressed="true">
+                Everything
+              </button>
+              <button class="chip" type="button" data-filter="wearables" aria-pressed="false">
+                Wearables
+              </button>
+              <button class="chip" type="button" data-filter="home" aria-pressed="false">
+                Home
+              </button>
+              <button class="chip" type="button" data-filter="bags" aria-pressed="false">
+                Bags
+              </button>
+            </div>
+            <p class="filters__status push" data-filter-status aria-live="polite"></p>
+          </div>
+
+          <div class="product-grid" data-reveal-stagger>
+            <article class="product" data-category="home" data-reveal>
+              <div class="product__media">
+                <image-slot ratio="4/5" tone="clay" label="Meadow throw"></image-slot>
+                <span class="tag tag--accent product__flag">Bestseller</span>
+                <button
+                  class="btn btn--solid btn--sm btn--block product__add"
+                  type="button"
+                  data-add="Meadow Throw"
+                >
+                  Add to basket
+                </button>
+              </div>
+              <div class="product__body">
+                <h3 class="product__name">
+                  <a href="#shop" data-stub="Product pages land with the next drop"
+                    >Meadow Throw</a
+                  >
+                </h3>
+                <p class="product__meta">Merino &amp; alpaca &middot; 130 × 170 cm</p>
+                <p class="product__price num">$148</p>
+              </div>
+            </article>
+
+            <article class="product" data-category="wearables" data-reveal>
+              <div class="product__media">
+                <image-slot ratio="4/5" tone="sage" label="Coast cardigan"></image-slot>
+                <button
+                  class="btn btn--solid btn--sm btn--block product__add"
+                  type="button"
+                  data-add="Coast Cardigan"
+                >
+                  Add to basket
+                </button>
+              </div>
+              <div class="product__body">
+                <h3 class="product__name">
+                  <a href="#shop" data-stub="Product pages land with the next drop"
+                    >Coast Cardigan</a
+                  >
+                </h3>
+                <p class="product__meta">Chunky British wool &middot; XS–XXL</p>
+                <p class="product__price num">$210</p>
+              </div>
+            </article>
+
+            <article class="product" data-category="bags" data-reveal>
+              <div class="product__media">
+                <image-slot ratio="4/5" tone="wheat" label="Market net bag"></image-slot>
+                <button
+                  class="btn btn--solid btn--sm btn--block product__add"
+                  type="button"
+                  data-add="Market Net Bag"
+                >
+                  Add to basket
+                </button>
+              </div>
+              <div class="product__body">
+                <h3 class="product__name">
+                  <a href="#shop" data-stub="Product pages land with the next drop"
+                    >Market Net Bag</a
+                  >
+                </h3>
+                <p class="product__meta">Organic cotton &middot; Holds 8 kg</p>
+                <p class="product__price num">$46</p>
+              </div>
+            </article>
+
+            <article class="product" data-category="wearables" data-reveal>
+              <div class="product__media">
+                <image-slot ratio="4/5" tone="blush" label="Ridge beanie"></image-slot>
+                <span class="tag tag--support product__flag">New</span>
+                <button
+                  class="btn btn--solid btn--sm btn--block product__add"
+                  type="button"
+                  data-add="Ridge Beanie"
+                >
+                  Add to basket
+                </button>
+              </div>
+              <div class="product__body">
+                <h3 class="product__name">
+                  <a href="#shop" data-stub="Product pages land with the next drop"
+                    >Ridge Beanie</a
+                  >
+                </h3>
+                <p class="product__meta">Alpaca blend &middot; One size</p>
+                <p class="product__price num">$58</p>
+              </div>
+            </article>
+
+            <article class="product" data-category="home" data-reveal>
+              <div class="product__media">
+                <image-slot ratio="4/5" tone="sage" label="Granny square cushion"></image-slot>
+                <button
+                  class="btn btn--solid btn--sm btn--block product__add"
+                  type="button"
+                  data-add="Granny Square Cushion"
+                >
+                  Add to basket
+                </button>
+              </div>
+              <div class="product__body">
+                <h3 class="product__name">
+                  <a href="#shop" data-stub="Product pages land with the next drop"
+                    >Granny Square Cushion</a
+                  >
+                </h3>
+                <p class="product__meta">Lambswool &middot; 45 × 45 cm</p>
+                <p class="product__price num">$72</p>
+              </div>
+            </article>
+
+            <article class="product" data-category="home" data-reveal>
+              <div class="product__media">
+                <image-slot ratio="4/5" tone="ink" label="Pebble coasters"></image-slot>
+                <button
+                  class="btn btn--solid btn--sm btn--block product__add"
+                  type="button"
+                  data-add="Pebble Coasters"
+                >
+                  Add to basket
+                </button>
+              </div>
+              <div class="product__body">
+                <h3 class="product__name">
+                  <a href="#shop" data-stub="Product pages land with the next drop"
+                    >Pebble Coasters</a
+                  >
+                </h3>
+                <p class="product__meta">Set of four &middot; Cotton twine</p>
+                <p class="product__price num">$34</p>
+              </div>
+            </article>
+
+            <article class="product" data-category="wearables" data-reveal>
+              <div class="product__media">
+                <image-slot ratio="4/5" tone="wheat" label="Dune bucket hat"></image-slot>
+                <button
+                  class="btn btn--solid btn--sm btn--block product__add"
+                  type="button"
+                  data-add="Dune Bucket Hat"
+                >
+                  Add to basket
+                </button>
+              </div>
+              <div class="product__body">
+                <h3 class="product__name">
+                  <a href="#shop" data-stub="Product pages land with the next drop"
+                    >Dune Bucket Hat</a
+                  >
+                </h3>
+                <p class="product__meta">Raffia &amp; cotton &middot; S/M, L/XL</p>
+                <p class="product__price num">$64</p>
+              </div>
+            </article>
+
+            <article class="product" data-category="bags" data-reveal>
+              <div class="product__media">
+                <image-slot ratio="4/5" tone="clay" label="Crescent shoulder bag"></image-slot>
+                <span class="tag product__flag">Low stock</span>
+                <button
+                  class="btn btn--solid btn--sm btn--block product__add"
+                  type="button"
+                  data-add="Crescent Shoulder Bag"
+                >
+                  Add to basket
+                </button>
+              </div>
+              <div class="product__body">
+                <h3 class="product__name">
+                  <a href="#shop" data-stub="Product pages land with the next drop"
+                    >Crescent Shoulder Bag</a
+                  >
+                </h3>
+                <p class="product__meta">Waxed cotton &middot; Leather strap</p>
+                <p class="product__price num">$96</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= craft -->
+      <section class="section section--sunk" id="craft">
+        <div class="shell split">
+          <figure class="figure split__media" data-reveal>
+            <image-slot ratio="1/1" tone="sage" label="The studio, mid-blocking"></image-slot>
+            <figcaption>
+              Wet-blocking a Meadow throw. Pinned flat for two days before it's measured
+              again.
+            </figcaption>
+          </figure>
+
+          <div class="split__body" data-reveal>
+            <p class="eyebrow">Made by hand</p>
+            <h2 class="h1">
+              Four days, two hands, no shortcuts.
+            </h2>
+            <p class="prose">
+              Nothing here is machine-knit and finished by hand — it's crocheted from the
+              first chain to the last, which is why the collection is small and the wait
+              is real.
+            </p>
+
+            <ol class="steps">
+              <li class="step">
+                <span class="step__num">01</span>
+                <div>
+                  <h3 class="step__title">Choose the fibre</h3>
+                  <p class="step__body">
+                    British wool, alpaca and organic cotton from three mills we've visited.
+                    Undyed at source.
+                  </p>
+                </div>
+              </li>
+              <li class="step">
+                <span class="step__num">02</span>
+                <div>
+                  <h3 class="step__title">Dye in small batches</h3>
+                  <p class="step__body">
+                    Six skeins at a time in the garden studio. Colour shifts a little
+                    between lots — that's the point.
+                  </p>
+                </div>
+              </li>
+              <li class="step">
+                <span class="step__num">03</span>
+                <div>
+                  <h3 class="step__title">Crochet by hand</h3>
+                  <p class="step__body">
+                    A throw runs to roughly 34 hours across four days. Tension is checked
+                    against a swatch every evening.
+                  </p>
+                </div>
+              </li>
+              <li class="step">
+                <span class="step__num">04</span>
+                <div>
+                  <h3 class="step__title">Block and finish</h3>
+                  <p class="step__body">
+                    Wet-blocked, pinned, dried flat, labelled by hand and packed in paper.
+                    No plastic in the box.
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= stats -->
+      <section class="section section--tight section--invert">
+        <div class="shell">
+          <div class="stats" data-reveal-stagger>
+            <div class="stat" data-reveal>
+              <span class="stat__num num"><ds-counter value="2400"></ds-counter>+</span>
+              <span class="stat__label">Pieces made since 2013</span>
+            </div>
+            <div class="stat" data-reveal>
+              <span class="stat__num num"><ds-counter value="34"></ds-counter></span>
+              <span class="stat__label">Hours in an average throw</span>
+            </div>
+            <div class="stat" data-reveal>
+              <span class="stat__num num"><ds-counter value="12"></ds-counter></span>
+              <span class="stat__label">Years at the hook</span>
+            </div>
+            <div class="stat" data-reveal>
+              <span class="stat__num num"><ds-counter value="100"></ds-counter>%</span>
+              <span class="stat__label">Natural fibres</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================== lookbook -->
+      <section class="section" id="lookbook">
+        <div class="shell">
+          <div class="section__head section__head--split">
+            <div data-reveal>
+              <p class="eyebrow">Lookbook</p>
+              <h2 class="h1">Autumn, at home.</h2>
+            </div>
+            <a class="link-arrow" href="#shop" data-reveal>
+              See the full run
+              <ds-icon name="arrow"></ds-icon>
+            </a>
+          </div>
+
+          <div class="lookbook" data-reveal-stagger>
+            <figure data-reveal>
+              <image-slot tone="clay" label="Meadow throw, living room"></image-slot>
+              <figcaption>Meadow — hand-dyed madder</figcaption>
+            </figure>
+            <figure data-reveal>
+              <image-slot tone="sage" label="Coast cardigan detail"></image-slot>
+              <figcaption>Coast — chunky wool</figcaption>
+            </figure>
+            <figure data-reveal>
+              <image-slot tone="wheat" label="Skeins drying"></image-slot>
+              <figcaption>Dye day</figcaption>
+            </figure>
+            <figure data-reveal>
+              <image-slot tone="blush" label="Ridge beanie, on a hook"></image-slot>
+              <figcaption>Ridge — alpaca blend</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================= reviews -->
+      <section class="section section--sunk" id="reviews">
+        <div class="shell">
+          <div class="section__head">
+            <div data-reveal>
+              <p class="eyebrow">In their homes</p>
+              <h2 class="h1">What people say after a winter.</h2>
+            </div>
+          </div>
+
+          <div class="quotes" data-reveal-stagger>
+            <figure class="quote" data-reveal>
+              <div class="quote__stars" role="img" aria-label="Five out of five">
+                <ds-icon name="star"></ds-icon><ds-icon name="star"></ds-icon
+                ><ds-icon name="star"></ds-icon><ds-icon name="star"></ds-icon
+                ><ds-icon name="star"></ds-icon>
+              </div>
+              <blockquote class="quote__text">
+                The throw is the single nicest thing in our house. Three winters in and it
+                hasn't pilled once.
+              </blockquote>
+              <figcaption class="quote__by">Priya N. &middot; Bristol</figcaption>
+            </figure>
+
+            <figure class="quote" data-reveal>
+              <div class="quote__stars" role="img" aria-label="Five out of five">
+                <ds-icon name="star"></ds-icon><ds-icon name="star"></ds-icon
+                ><ds-icon name="star"></ds-icon><ds-icon name="star"></ds-icon
+                ><ds-icon name="star"></ds-icon>
+              </div>
+              <blockquote class="quote__text">
+                I ordered the cardigan a size up and Sam re-blocked it for me without being
+                asked. That's the whole business in one sentence.
+              </blockquote>
+              <figcaption class="quote__by">Marta L. &middot; Lisbon</figcaption>
+            </figure>
+
+            <figure class="quote" data-reveal>
+              <div class="quote__stars" role="img" aria-label="Five out of five">
+                <ds-icon name="star"></ds-icon><ds-icon name="star"></ds-icon
+                ><ds-icon name="star"></ds-icon><ds-icon name="star"></ds-icon
+                ><ds-icon name="star"></ds-icon>
+              </div>
+              <blockquote class="quote__text">
+                You can feel the hours in it. Nothing about it feels like it came off a
+                shelf.
+              </blockquote>
+              <figcaption class="quote__by">Dan R. &middot; Portland</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================== faq -->
+      <section class="section" id="faq">
+        <div class="shell split">
+          <div class="split__body" data-reveal>
+            <p class="eyebrow">Good to know</p>
+            <h2 class="h1">Before you order.</h2>
+            <p class="prose">
+              Still unsure about sizing or a colour? Email the studio — Samantha answers
+              these herself, usually within a day.
+            </p>
+            <p class="mt-6">
+              <a class="btn btn--ghost" href="mailto:hello@samanthascrochet.example">
+                <ds-icon name="mail"></ds-icon>
+                Email the studio
+              </a>
+            </p>
+          </div>
+
+          <div class="faq" data-reveal>
+            <details class="faq__item">
+              <summary class="faq__q">
+                How long until it arrives?
+                <span class="faq__sign" aria-hidden="true"></span>
+              </summary>
+              <div class="faq__a">
+                Everything is made to order. Most pieces ship within 2–3 weeks; throws and
+                blankets take 3–4. You'll get a photo of your piece before it's boxed.
+              </div>
+            </details>
+
+            <details class="faq__item">
+              <summary class="faq__q">
+                What yarn do you use?
+                <span class="faq__sign" aria-hidden="true"></span>
+              </summary>
+              <div class="faq__a">
+                British wool, alpaca and organic cotton, bought undyed and dyed here in
+                six-skein lots. No acrylic, ever.
+              </div>
+            </details>
+
+            <details class="faq__item">
+              <summary class="faq__q">
+                Can I ask for a different colour or size?
+                <span class="faq__sign" aria-hidden="true"></span>
+              </summary>
+              <div class="faq__a">
+                Yes. Most pieces can be resized, and anything in the current palette can be
+                dyed to order. Email before you buy and we'll talk it through.
+              </div>
+            </details>
+
+            <details class="faq__item">
+              <summary class="faq__q">
+                How do I wash it?
+                <span class="faq__sign" aria-hidden="true"></span>
+              </summary>
+              <div class="faq__a">
+                Hand wash cool with a wool detergent, press the water out in a towel, then
+                dry flat. Never wring, never hang. A care card ships with every order.
+              </div>
+            </details>
+
+            <details class="faq__item">
+              <summary class="faq__q">
+                Do you ship internationally?
+                <span class="faq__sign" aria-hidden="true"></span>
+              </summary>
+              <div class="faq__a">
+                Worldwide, in plastic-free packaging. Shipping is free over $120. Duties
+                outside the UK are the buyer's responsibility.
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================== signup -->
+      <section class="section section--sunk">
+        <div class="shell signup">
+          <div data-reveal>
+            <p class="eyebrow">The list</p>
+            <h2 class="h2">First look at every drop.</h2>
+            <p class="prose">
+              Small batches sell out. Subscribers see new pieces and restocks a day early —
+              about one email a month, never more.
+            </p>
+          </div>
+
+          <form class="field" data-signup novalidate data-reveal>
+            <label class="field__label" for="signup-email">Email address</label>
+            <div class="field__control">
+              <input
+                class="field__input"
+                id="signup-email"
+                name="email"
+                type="email"
+                inputmode="email"
+                autocomplete="email"
+                placeholder="you@example.com"
+              />
+              <button class="btn btn--primary" type="submit">
+                Join
+                <ds-icon name="arrow"></ds-icon>
+              </button>
+            </div>
+            <p class="field__note" data-signup-note aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- ========================================================== footer -->
+    <footer class="site-footer" data-page-region>
+      <div class="shell">
+        <div class="footer__grid">
+          <div>
+            <a class="brand" href="#top">
+              <svg
+                class="brand__mark"
+                viewBox="0 0 32 32"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="14.5" cy="15.5" r="10.5" />
+                <path d="M6.5 8.8c4.6 1.9 9.4 5.9 11.8 12.1" />
+                <path d="M4.6 17c4.4-.9 9 .7 12.1 4.4" />
+                <path d="M11.6 5.4c1.9 4 6.4 7.1 12 8.2" />
+                <path d="M25 18.5c1 2 2.3 3.2 3.8 3.7-1.8.7-3 2-3.5 4" />
+              </svg>
+              <span class="brand__name">
+                <b>Samantha's</b>
+                <span>Crochet Boutique</span>
+              </span>
+            </a>
+            <p class="prose mt-5 measure-short">
+              Hand-crocheted goods, made to order in Somerset since 2013.
+            </p>
+            <div class="cluster mt-5">
+              <a class="icon-btn" href="#top" data-stub="Instagram opens in the live site">
+                <ds-icon name="instagram"></ds-icon>
+                <span class="sr-only">Instagram</span>
+              </a>
+              <a class="icon-btn" href="#top" data-stub="Pinterest opens in the live site">
+                <ds-icon name="pinterest"></ds-icon>
+                <span class="sr-only">Pinterest</span>
+              </a>
+              <a class="icon-btn" href="mailto:hello@samanthascrochet.example">
+                <ds-icon name="mail"></ds-icon>
+                <span class="sr-only">Email</span>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h2 class="footer__title">Shop</h2>
+            <ul class="footer__list">
+              <li><a href="#shop">Blankets &amp; throws</a></li>
+              <li><a href="#shop">Wearables</a></li>
+              <li><a href="#shop">Bags</a></li>
+              <li><a href="#shop">Homeware</a></li>
+              <li><a href="#top" data-stub="Gift cards return in November">Gift cards</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer__title">Studio</h2>
+            <ul class="footer__list">
+              <li><a href="#craft">The process</a></li>
+              <li><a href="#craft">Yarn sourcing</a></li>
+              <li><a href="#lookbook">Lookbook</a></li>
+              <li><a href="#reviews">Reviews</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer__title">Help</h2>
+            <ul class="footer__list">
+              <li><a href="#faq">Shipping &amp; returns</a></li>
+              <li><a href="#faq">Care guide</a></li>
+              <li><a href="#faq">Sizing</a></li>
+              <li><a href="mailto:hello@samanthascrochet.example">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <p>
+            &copy; <span data-year>2026</span> Samantha's Crochet Boutique &middot; Made by
+            hand in Somerset
+          </p>
+          <p>Modernist design system</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ========================================================== drawer -->
+    <div class="drawer" id="nav-drawer" data-open="false">
+      <div class="shell drawer__head">
+        <span class="eyebrow eyebrow--bare">Menu</span>
+        <button class="icon-btn" type="button" data-nav-close>
+          <ds-icon name="close"></ds-icon>
+          <span class="sr-only">Close menu</span>
+        </button>
+      </div>
+
+      <nav class="shell drawer__body" aria-label="Mobile">
+        <a class="drawer__link" href="#shop">Shop <span class="num">01</span></a>
+        <a class="drawer__link" href="#craft">Craft <span class="num">02</span></a>
+        <a class="drawer__link" href="#lookbook">Lookbook <span class="num">03</span></a>
+        <a class="drawer__link" href="#reviews">Reviews <span class="num">04</span></a>
+        <a class="drawer__link" href="#faq">FAQ <span class="num">05</span></a>
+
+        <div class="drawer__foot">
+          <p>Made to order in Somerset. Free shipping over $120.</p>
+          <p class="mt-3">
+            <a href="mailto:hello@samanthascrochet.example">hello@samanthascrochet.example</a>
+          </p>
+        </div>
+      </nav>
+    </div>
+
+    <div class="toast-region" role="status" aria-live="polite"></div>
+  </body>
+</html>
